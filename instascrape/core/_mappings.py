@@ -126,6 +126,7 @@ class _PostMapping(_GeneralMapping):
             "video_view_count": deque(["video_view_count"]),
             "username": deque(["shortcode_media_owner_username"]),
             "full_name": deque(['owner_full_name']),
+            "user_biography": str(deque(['user_biography'])).encode('utf-8', 'replace').decode(),
         }
     )
 
@@ -230,6 +231,7 @@ class _ProfileMapping(_GeneralMapping):
             "username": deque(["user_username"]),
             "connected_fb_page": deque(["connected_fb_page"]),
             "posts": deque(["edge_owner_to_timeline_media_count"]),
+            "user_biography": deque(['user_biography']),
         }
     )
 
