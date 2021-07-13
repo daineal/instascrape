@@ -15,7 +15,7 @@ class Profile(_StaticHtmlScraper):
 
     _Mapping = _ProfileMapping
 
-    def get_recent_posts(self, amt: int = 12) -> List[Post]:
+    def get_recent_posts(self, headers, amt: int = 12) -> List[Post]:
         """
         Return a list of the profiles recent posts. Max available for return
         is 12.
@@ -46,11 +46,20 @@ class Profile(_StaticHtmlScraper):
 
         for post in post_arr[:amt]:
             json_dict = post["node"]
+            # print("KAKOY2")
+            # print(json_dict)
+            # print(json_dict["edge_media_to_caption"])
+            # print(json_dict["edge_media_to_caption"]["edges"])
+            # print(json_dict["edge_media_to_caption"]["edges"][0])
+            # print(json_dict["edge_media_to_caption"]["edges"][0]["node"])
+            # print(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"])
+            # c_v = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
+            # print(c_v)
             mapping = _PostMapping.post_from_profile_mapping()
             post = Post(json_dict)
-            post.scrape(mapping=mapping)
+            post.scrape(mapping=mapping, headers=headers)
             post.username = self.username
-            post.full_name = self.full_name
+            post.full_name = str(self.full_name).encode('utf-8', 'replace').decode()
             post.caption = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
             posts.append(post)
         return posts
