@@ -51,6 +51,7 @@ class Profile(_StaticHtmlScraper):
             post.scrape(mapping=mapping)
             post.username = self.username
             post.full_name = self.full_name
+            post.caption = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
             posts.append(post)
         return posts
 
