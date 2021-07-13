@@ -107,7 +107,7 @@ class _PostMapping(_GeneralMapping):
             "is_video": deque(["is_video"]),
             "tracking_token": deque(["tracking_token"]),
             "tagged_users": deque(["edge_media_to_tagged_user"]),
-            "caption": deque(["text"]),
+            "caption": deque(["edge_media_to_caption", "edges", 0, "node", "text"]).encode('utf-8', 'replace').decode(),
             "caption_is_edited": deque(["caption_is_edited"]),
             "has_ranked_comments": deque(["has_ranked_comments"]),
             "comments": deque(["count"]),
@@ -125,7 +125,7 @@ class _PostMapping(_GeneralMapping):
             "has_audio": deque(["has_audio"]),
             "video_view_count": deque(["video_view_count"]),
             "username": deque(["shortcode_media_owner_username"]),
-            "full_name": deque(['owner_full_name']),
+            "full_name": deque(['owner_full_name']).encode('utf-8', 'replace').decode(),
             "user_biography": str(deque(['user_biography'])).encode('utf-8', 'replace').decode(),
         }
     )
@@ -208,7 +208,7 @@ class _ProfileMapping(_GeneralMapping):
             "followed_by_viewer": deque(["followed_by_viewer"]),
             "following": deque(["edge_follow_count"]),
             "follows_viewer": deque(["follows_viewer"]),
-            "full_name": deque(["user_full_name"]),
+            "full_name": deque(["user_full_name"]).encode('utf-8', 'replace').decode(),
             "has_ar_effects": deque(["has_ar_effects"]),
             "has_clips": deque(["has_clips"]),
             "has_guides": deque(["has_guides"]),
