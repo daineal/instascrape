@@ -53,14 +53,18 @@ class Profile(_StaticHtmlScraper):
             # print(json_dict["edge_media_to_caption"]["edges"][0])
             # print(json_dict["edge_media_to_caption"]["edges"][0]["node"])
             # print(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"])
-            # c_v = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
+            caption_text = ""
+            try:
+                caption_text = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
+            except Exception as e:
+                caption_text = "not found post caption text"
             # print(c_v)
             mapping = _PostMapping.post_from_profile_mapping()
             post = Post(json_dict)
             post.scrape(mapping=mapping, headers=headers)
             post.username = self.username
             post.full_name = str(self.full_name).encode('utf-8', 'replace').decode()
-            post.caption = str(json_dict["edge_media_to_caption"]["edges"][0]["node"]["text"]).encode('utf-8', 'replace').decode()
+            post.caption = caption_text
             posts.append(post)
         return posts
 
